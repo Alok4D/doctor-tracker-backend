@@ -6,8 +6,8 @@ import auth from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.get('/', PatientController.getAllPatients);
-router.get('/:id', PatientController.getPatientById);
+router.get('/', auth('admin'), PatientController.getAllPatients);
+router.get('/:id', auth('admin'), PatientController.getPatientById);
 
 router.post(
   '/',
@@ -26,4 +26,3 @@ router.patch(
 router.delete('/:id', auth('admin'), PatientController.deletePatient);
 
 export const PatientRoutes = router;
-

@@ -6,12 +6,12 @@ import auth from '../../middlewares/auth';
 
 const router = express.Router();
 
-// Public / Authenticated read routes
-router.get('/', DoctorController.getAllDoctors);
-router.get('/:id', DoctorController.getDoctorById);
+// Authenticated Admin Read Routes
+router.get('/', auth('admin'), DoctorController.getAllDoctors);
+router.get('/:id', auth('admin'), DoctorController.getDoctorById);
 
-// Specific doctor's corresponding patients (PDF Page 2 Requirements)
-router.get('/:id/patients', DoctorController.getDoctorPatients);
+// Specific doctor's corresponding patients
+router.get('/:id/patients', auth('admin'), DoctorController.getDoctorPatients);
 router.post(
   '/:id/patients',
   auth('admin'),
@@ -41,4 +41,3 @@ router.patch(
 router.delete('/:id', auth('admin'), DoctorController.deleteDoctor);
 
 export const DoctorRoutes = router;
-

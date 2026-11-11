@@ -1,206 +1,91 @@
-#Doctor Tracker 
+# Doctor Tracker — Hospital Admin REST API (Backend)
 
-Doctor Tracker – Project Specification 
-1. Project Overview 
-Doctor Tracker is a secure administrative web application that allows 
-authenticated users to manage doctors and their corresponding patients. The 
-system focuses on performance optimization, clean UX, and data 
-visualization. 
- 
-2. Core Features 
-2.1 Authentication 
-● Only authenticated users can access the portal. 
- 
-● Implement secure login functionality. 
- 
-● Protect all routes using proper authentication and authorization 
-mechanisms. 
- 
- 
-2.2 Doctor Management 
-● Admin can: 
- 
-○ Create a doctor with the following information: 
- 
-■ Name 
-■ specialization 
- 
-■ hospital 
- 
-■ Phone 
- 
-■ Email 
- 
-○ View a list of all doctors. 
- 
-○ Search doctors. 
- 
-○ Filter doctors (date-wise and other relevant filters). 
- 
-○ Paginate doctor records. 
- 
-○ View corresponding patients for each doctor. 
- 
-○ Add new patients under a specific doctor. 
- 
-○ Delete patients from the doctor’s patient list. 
- 
- 
- 
-2.3 Patient Management 
-● Dedicated Patient Page: 
- 
-○ List all patients. 
- 
-○ Edit patient information. 
- 
-○ Delete patients. 
- 
-○ Implement: 
- 
-■ Pagination 
- 
-■ Search functionality 
- 
-■ Filtering (date-wise, patient-condition and other relevant 
-filters) 
- 
- 
-3. Dashboard & Data Visualization 
-● Admin Dashboard should include: 
- 
-○ Visual representation of data. 
- 
-○ Analytics such as: 
- 
-■ Total doctors 
- 
-■ Total patients 
- 
-■ Patients per doctor 
- 
-■ Date-based statistics 
- 
-○ Charts and graphs (any suitable analytics library may be used). 
- 
-● Focus on: 
- 
-○ Clean data aggregation 
- 
-○ Optimized query performance 
- 
-○ Meaningful visual insights 
- 
- 
-4. UI/UX Requirements 
-● The UI must be modern and visually appealing. 
- 
-● Demonstrate strong frontend skills. 
- 
-● Ensure: 
- 
-○ Clean layout 
- 
-○ Proper spacing and hierarchy 
- 
-○ Responsive design 
- 
-○ Smooth navigation 
- 
-○ Good user experience (UX best practices) 
- 
-● Clear navigation between: 
- 
-○ Dashboard 
- 
-○ Doctors 
- 
-○ Patients 
- 
- 
-5. Performance & Optimization 
-● Optimize database queries for: 
- 
-○ Searching 
- 
-○ Filtering 
- 
-○ Pagination 
- 
-● Implement best practices: 
- 
-○ Proper indexing in MongoDB 
- 
-○ Efficient query patterns 
- 
-○ Avoid unnecessary re-renders 
- 
-○ Clean folder structure 
- 
-○ Reusable components 
- 
-○ API validation and error handling 
- 
- 
-6. Tech Stack 
-The project must be implemented using: 
-● Frontend & Backend Framework: Next.js (Full-stack inside Next.js 
-application) 
- 
-● Database: MongoDB 
- 
-● Backend Technologies: Node.js, Express (integrated within Next.js 
-architecture) 
- 
-● RESTful API design principles 
- 
-Frontend: Next.js (separate client application)
-Backend: Node.js, Express (separate standalone server)
-Database: MongoDB
-API: RESTful API design principles (frontend communicates
-with backend over REST endpoints)
-● Proper state management and data fetching strategies 
- 
- 
-7. Evaluation Criteria 
-The project will be evaluated based on: 
-● Code structure and cleanliness 
- 
-● Query optimization 
- 
-● UX/UI quality 
- 
-● Data visualization implementation 
- 
-● Performance efficiency 
- 
-● Authentication implementation 
- 
-● Use of best practices in Next.js and MongoDB 
- 
-● Scalability considerations 
- 
- 
- 
- README Requirements (Standardized Template) 
-The README.md is the primary technical documentation. It must include: 
-Section Requirement 
-Description A one-paragraph "Elevator Pitch" for the app's purpose. 
-Setup Guide Step-by-step local installation. Must include an 
-.env.example file. 
-System 
-Architecture 
-A high-level overview of the data flow and service 
-interactions. 
-Technical 
-Decisions 
-Deep dive into 2 specific decisions (e.g., "Why we 
-chose Redux over Context API"). 
-Visual Evidence High-quality screenshots of the UI (Desktop & Mobile 
-views). 
- 
- 
- 
-Submit your project link and github repo with credentials if required. 
+## 1. Description
 
+**Doctor Tracker Backend** is a high-performance, modular RESTful API built with **Node.js**, **Express 5**, **TypeScript**, **Zod**, and **MongoDB (Mongoose)**. It powers the Doctor Tracker administrative portal with JWT-authenticated route protection, indexed multi-criteria search/filtering/pagination, doctor-patient relational assignment management, and MongoDB aggregation pipelines for real-time hospital analytics.
 
+---
+
+## 2. Setup Guide
+
+### Prerequisites
+- Node.js `v18+`
+- MongoDB Atlas URI (or local MongoDB server)
+
+### Step-by-Step Local Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <your-backend-repo-url>
+   cd doctor-tracker-backend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Copy `.env.example` to `.env` and fill in your MongoDB Atlas connection string and JWT secrets:
+   ```bash
+   cp .env.example .env
+   ```
+   `.env.example`:
+   ```env
+   PORT=5000
+   NODE_ENV=development
+   DATABASE_URL=mongodb+srv://<db_username>:<db_password>@cluster0.1yjndj5.mongodb.net/doctor-tracker?retryWrites=true&w=majority
+   BCRYPT_SALT_ROUNDS=12
+   DEFAULT_PASS=password123
+   JWT_ACCESS_SECRET=your_jwt_access_secret_here
+   JWT_REFRESH_SECRET=your_jwt_refresh_secret_here
+   JWT_ACCESS_EXPIRES_IN=1d
+   JWT_REFRESH_EXPIRES_IN=365d
+   ```
+
+4. **Seed Sample Data (Optional for testing):**
+   ```bash
+   npm run seed
+   ```
+   Seeds 2 admin accounts (`admin@doctor-tracker.com` / `password123`), 14 specialist doctors, and 20 patients across all medical conditions and statuses.
+
+5. **Run the server:**
+   ```bash
+   npm run dev
+   ```
+   Server runs on `http://localhost:5000` with API prefix `/api/v1`.
+
+6. **Postman Collection:**
+   Import `doctor-tracker.postman_collection.json` from the repository root to test all Auth, Doctor, Patient, and Dashboard endpoints.
+
+---
+
+## 3. System Architecture
+
+Each feature domain is encapsulated inside `src/app/modules/<module>` following a clean Controller -> Service -> Validation -> Model architecture:
+
+```
+Client Request -> Express Router -> auth('admin') JWT Guard -> validateRequest(Zod) -> Controller -> Service (Mongoose/Aggregation) -> sendResponse()
+```
+
+### API Endpoints (`/api/v1`)
+- **Auth:** `POST /auth/login`, `POST /auth/logout`, `GET /auth/me`
+- **Doctors (Protected):** `GET /doctors`, `POST /doctors`, `GET /doctors/:id`, `PATCH /doctors/:id`, `DELETE /doctors/:id`, `GET /doctors/:id/patients`, `POST /doctors/:id/patients`, `DELETE /doctors/:id/patients/:patientId`
+- **Patients (Protected):** `GET /patients`, `POST /patients`, `GET /patients/:id`, `PATCH /patients/:id`, `DELETE /patients/:id`
+- **Dashboard Analytics (Protected):** `GET /dashboard/stats`, `GET /dashboard/patients-overview`, `GET /dashboard/specialty-stats`, `GET /dashboard/patients-per-doctor`
+
+---
+
+## 4. Technical Decisions
+
+### Decision 1: MongoDB Indexing & Aggregation Pipelines for Analytics & Scale
+Instead of running sequential JavaScript loops over populated documents, `Doctor` (`specialization`, `hospital`, `status`, `createdAt`, text index on `name`/`specialization`/`email`) and `Patient` (`doctorId`, `condition`, `status`, `createdAt`, text index on `name`/`phone`/`condition`) define compound & field indexes. Dashboard metrics and `patientCount` per doctor are computed directly in MongoDB via `$lookup`, `$group`, and `$project` aggregation stages.
+
+### Decision 2: Zod Schema Validation + Centralized Error Handling
+Every incoming `POST` and `PATCH` payload passes through `validateRequest` middleware backed by **Zod** schemas before reaching controllers, paired with `catchAsync` and a global Express error handler (`AppError`, Mongoose validation/cast/duplicate key error formatters) ensuring consistent HTTP status codes and clean API responses.
+
+---
+
+## 5. Visual Evidence
+
+- All endpoints verified via Postman (`doctor-tracker.postman_collection.json`) and integrated live with the Next.js frontend.
