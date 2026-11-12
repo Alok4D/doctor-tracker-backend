@@ -20,14 +20,14 @@ const patient_model_1 = require("./app/modules/patient/patient.model");
 const initialUsers = [
     {
         name: 'Admin',
-        email: 'admin@doctor-tracker.com',
-        password: config_1.default.default_password || 'password123',
+        email: 'admin@doctortracker.com',
+        password: config_1.default.default_password || 'Admin@12345',
         role: 'admin',
     },
     {
         name: 'Dr. Supervisor Admin',
         email: 'supervisor@doctor-tracker.com',
-        password: config_1.default.default_password || 'password123',
+        password: config_1.default.default_password || 'Admin@12345',
         role: 'admin',
     },
 ];

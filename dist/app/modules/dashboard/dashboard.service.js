@@ -30,11 +30,6 @@ const getStartDateFromRange = (range) => {
             start.setDate(start.getDate() - 30);
             return start;
         }
-        case '3m': {
-            const start = new Date(now);
-            start.setMonth(start.getMonth() - 3);
-            return start;
-        }
         case 'year': {
             const start = new Date(now.getFullYear(), 0, 1);
             return start;
