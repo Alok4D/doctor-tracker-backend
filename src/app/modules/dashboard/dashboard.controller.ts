@@ -4,7 +4,8 @@ import sendResponse from '../../utils/sendResponse';
 import { DashboardService } from './dashboard.service';
 
 const getStats = catchAsync(async (req, res) => {
-  const result = await DashboardService.getDashboardStats();
+  const range = (req.query.range as string) || 'all';
+  const result = await DashboardService.getDashboardStats(range);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -15,12 +16,13 @@ const getStats = catchAsync(async (req, res) => {
 });
 
 const getPatientsOverview = catchAsync(async (req, res) => {
-  const result = await DashboardService.getPatientsOverview();
+  const timeframe = (req.query.timeframe as string) || '30d';
+  const result = await DashboardService.getPatientsOverview(timeframe);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Patients overview trend retrieved successfully!',
+    message: 'Date-based patient statistics retrieved successfully!',
     data: result,
   });
 });
@@ -53,4 +55,3 @@ export const DashboardController = {
   getSpecialtyBreakdown,
   getPatientsPerDoctor,
 };
-

@@ -18,7 +18,8 @@ const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const dashboard_service_1 = require("./dashboard.service");
 const getStats = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield dashboard_service_1.DashboardService.getDashboardStats();
+    const range = req.query.range || 'all';
+    const result = yield dashboard_service_1.DashboardService.getDashboardStats(range);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
@@ -27,11 +28,12 @@ const getStats = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 
     });
 }));
 const getPatientsOverview = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield dashboard_service_1.DashboardService.getPatientsOverview();
+    const timeframe = req.query.timeframe || '30d';
+    const result = yield dashboard_service_1.DashboardService.getPatientsOverview(timeframe);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Patients overview trend retrieved successfully!',
+        message: 'Date-based patient statistics retrieved successfully!',
         data: result,
     });
 }));
