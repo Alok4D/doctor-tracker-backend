@@ -4,7 +4,7 @@ This is the backend for the **Doctor Tracker – Hospital Doctor & Patient Manag
 
 ## 🔗 Live Links
 - **Frontend**: https://doctor-tracker-zone.vercel.app
-- **Backend**: https://doctor-tracker-backend-git-main-alok-roys-projects.vercel.app
+- **Backend**: https://doctor-tracker-backend-zeta.vercel.app
 
 ## 🔑 Demo Login Credentials
 
