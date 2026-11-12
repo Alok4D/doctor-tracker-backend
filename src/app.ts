@@ -1,9 +1,10 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import notFound from './app/middlewares/notFound';
 import router from './app/routes';
+import { connectDB } from './app/utils/connectDB';
 
 const app: Application = express();
 
@@ -16,6 +17,16 @@ app.use(
     credentials: true,
   }),
 );
+
+// Ensure database connection is ready in serverless environments
+app.use('/api/v1', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Application routes under /api/v1
 app.use('/api/v1', router);
