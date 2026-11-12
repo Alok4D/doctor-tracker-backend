@@ -1,4 +1,4 @@
-# Doctor Tracker — Backend API
+# <img src="public/logo/doctor-tracker-logo.png" alt="Doctor Tracker Logo" width="32" align="absmiddle" />&nbsp;&nbsp;Doctor Tracker — Backend API
 
 This is the backend for the **Doctor Tracker – Hospital Doctor & Patient Management System**. It provides a secure, modular RESTful API built with Node.js, Express, TypeScript, and MongoDB.
 
