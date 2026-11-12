@@ -1,5 +1,6 @@
 import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
+import { parseFormDataWithOptionalImage } from '../../middlewares/upload';
 import { PatientValidation } from './patient.validation';
 import { PatientController } from './patient.controller';
 import auth from '../../middlewares/auth';
@@ -12,6 +13,7 @@ router.get('/:id', auth('admin'), PatientController.getPatientById);
 router.post(
   '/',
   auth('admin'),
+  parseFormDataWithOptionalImage('patients'),
   validateRequest(PatientValidation.createPatientZodSchema),
   PatientController.createPatient,
 );
@@ -19,6 +21,7 @@ router.post(
 router.patch(
   '/:id',
   auth('admin'),
+  parseFormDataWithOptionalImage('patients'),
   validateRequest(PatientValidation.updatePatientZodSchema),
   PatientController.updatePatient,
 );

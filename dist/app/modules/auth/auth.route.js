@@ -12,4 +12,5 @@ const auth_1 = __importDefault(require("../../middlewares/auth"));
 const router = express_1.default.Router();
 router.post('/login', (0, validateRequest_1.default)(auth_validation_1.AuthValidation.loginValidationSchema), auth_controller_1.AuthController.login);
 router.get('/me', (0, auth_1.default)('admin'), auth_controller_1.AuthController.getMe);
+router.post('/logout', auth_controller_1.AuthController.logout);
 exports.AuthRoutes = router;

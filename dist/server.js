@@ -12,16 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
 const config_1 = __importDefault(require("./app/config"));
+const connectDB_1 = require("./app/utils/connectDB");
 let server;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield mongoose_1.default.connect(config_1.default.database_url);
-            server = app_1.default.listen(config_1.default.port, () => {
-                console.log(`app is listening on port ${config_1.default.port}`);
+            yield (0, connectDB_1.connectDB)();
+            server = app_1.default.listen(config_1.default.port || 5000, () => {
+                console.log(`app is listening on port ${config_1.default.port || 5000}`);
             });
         }
         catch (err) {
@@ -29,17 +29,21 @@ function main() {
         }
     });
 }
-main();
-process.on('unhandledRejection', () => {
-    console.log(`😈 unahandledRejection is detected , shutting down ...`);
-    if (server) {
-        server.close(() => {
-            process.exit(1);
-        });
-    }
-    process.exit(1);
-});
-process.on('uncaughtException', () => {
-    console.log(`😈 uncaughtException is detected , shutting down ...`);
-    process.exit(1);
-});
+// Only start an HTTP listener when running outside Vercel Serverless runtime
+if (!process.env.VERCEL) {
+    main();
+    process.on('unhandledRejection', () => {
+        console.log(`😈 unhandledRejection is detected, shutting down...`);
+        if (server) {
+            server.close(() => {
+                process.exit(1);
+            });
+        }
+        process.exit(1);
+    });
+    process.on('uncaughtException', () => {
+        console.log(`😈 uncaughtException is detected, shutting down...`);
+        process.exit(1);
+    });
+}
+exports.default = app_1.default;

@@ -1,5 +1,6 @@
 import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
+import { parseFormDataWithOptionalImage } from '../../middlewares/upload';
 import { DoctorValidation } from './doctor.validation';
 import { DoctorController } from './doctor.controller';
 import auth from '../../middlewares/auth';
@@ -15,6 +16,7 @@ router.get('/:id/patients', auth('admin'), DoctorController.getDoctorPatients);
 router.post(
   '/:id/patients',
   auth('admin'),
+  parseFormDataWithOptionalImage('patients'),
   DoctorController.addPatientToDoctor,
 );
 router.delete(
@@ -27,6 +29,7 @@ router.delete(
 router.post(
   '/',
   auth('admin'),
+  parseFormDataWithOptionalImage('doctors'),
   validateRequest(DoctorValidation.createDoctorZodSchema),
   DoctorController.createDoctor,
 );
@@ -34,6 +37,7 @@ router.post(
 router.patch(
   '/:id',
   auth('admin'),
+  parseFormDataWithOptionalImage('doctors'),
   validateRequest(DoctorValidation.updateDoctorZodSchema),
   DoctorController.updateDoctor,
 );

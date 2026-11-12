@@ -124,12 +124,19 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Dr. Emily Watson\",\n  \"specialization\": \"Cardiologist\",\n  \"hospital\": \"Square Hospital\",\n  \"phone\": \"+880 1711 998877\",\n  \"email\": \"emily.watson@hospital.com\",\n  \"status\": \"Active\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "Dr. Emily Watson", "type": "text" },
+                { "key": "specialization", "value": "Cardiologist", "type": "text" },
+                { "key": "hospital", "value": "Square Hospital", "type": "text" },
+                { "key": "phone", "value": "+880 1711 998877", "type": "text" },
+                { "key": "email", "value": "emily.watson@hospital.com", "type": "text" },
+                { "key": "status", "value": "Active", "type": "text" },
+                { "key": "photo", "type": "file", "src": [], "disabled": true }
+              ]
             },
             "url": {
               "raw": "{{baseUrl}}/doctors",
@@ -142,7 +149,9 @@
           "name": "Get Corresponding Patients for Doctor (PDF Page 2)",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
             "url": {
               "raw": "{{baseUrl}}/doctors/{{doctorId}}/patients",
               "host": ["{{baseUrl}}"],
@@ -155,12 +164,19 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Karim Ullah\",\n  \"age\": 45,\n  \"gender\": \"Male\",\n  \"condition\": \"Hypertension\",\n  \"phone\": \"+880 1819 001122\",\n  \"status\": \"Admitted\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "Karim Ullah", "type": "text" },
+                { "key": "age", "value": "45", "type": "text" },
+                { "key": "gender", "value": "Male", "type": "text" },
+                { "key": "condition", "value": "Hypertension", "type": "text" },
+                { "key": "phone", "value": "+880 1819 001122", "type": "text" },
+                { "key": "status", "value": "Admitted", "type": "text" },
+                { "key": "photo", "type": "file", "src": [], "disabled": true }
+              ]
             },
             "url": {
               "raw": "{{baseUrl}}/doctors/{{doctorId}}/patients",
@@ -188,12 +204,15 @@
           "request": {
             "method": "PATCH",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n  \"phone\": \"+880 1711 000111\",\n  \"status\": \"Active\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                { "key": "phone", "value": "+880 1711 000111", "type": "text" },
+                { "key": "status", "value": "Active", "type": "text" },
+                { "key": "photo", "type": "file", "src": [], "disabled": true }
+              ]
             },
             "url": {
               "raw": "{{baseUrl}}/doctors/{{doctorId}}",
@@ -256,12 +275,20 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Mahmud Hasan\",\n  \"age\": 38,\n  \"gender\": \"Male\",\n  \"condition\": \"Diabetes Type 2\",\n  \"phone\": \"+880 1822 334455\",\n  \"doctorId\": \"{{doctorId}}\",\n  \"status\": \"Admitted\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "Mahmud Hasan", "type": "text" },
+                { "key": "age", "value": "38", "type": "text" },
+                { "key": "gender", "value": "Male", "type": "text" },
+                { "key": "condition", "value": "Diabetes Type 2", "type": "text" },
+                { "key": "phone", "value": "+880 1822 334455", "type": "text" },
+                { "key": "doctorId", "value": "{{doctorId}}", "type": "text" },
+                { "key": "status", "value": "Admitted", "type": "text" },
+                { "key": "photo", "type": "file", "src": [], "disabled": true }
+              ]
             },
             "url": {
               "raw": "{{baseUrl}}/patients",
@@ -275,12 +302,15 @@
           "request": {
             "method": "PATCH",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n  \"condition\": \"Diabetes Type 2 - Controlled\",\n  \"status\": \"Followup\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                { "key": "condition", "value": "Diabetes Type 2 - Controlled", "type": "text" },
+                { "key": "status", "value": "Followup", "type": "text" },
+                { "key": "photo", "type": "file", "src": [], "disabled": true }
+              ]
             },
             "url": {
               "raw": "{{baseUrl}}/patients/{{patientId}}",
