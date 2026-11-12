@@ -58,7 +58,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"admin@doctor-tracker.com\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\n  \"email\": \"admin@doctortracker.com\",\n  \"password\": \"Admin@12345\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/auth/login",
@@ -342,23 +342,39 @@
           "name": "Get Dashboard Statistics (KPIs)",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/stats",
+              "raw": "{{baseUrl}}/dashboard/stats?range=all",
               "host": ["{{baseUrl}}"],
-              "path": ["dashboard", "stats"]
+              "path": ["dashboard", "stats"],
+              "query": [
+                { "key": "range", "value": "all" }
+              ]
             }
           }
         },
         {
-          "name": "Get Patients Overview Trend",
+          "name": "Get Date-based Statistics & Overview",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/patients-overview",
+              "raw": "{{baseUrl}}/dashboard/patients-overview?timeframe=all",
               "host": ["{{baseUrl}}"],
-              "path": ["dashboard", "patients-overview"]
+              "path": ["dashboard", "patients-overview"],
+              "query": [
+                { "key": "timeframe", "value": "all" }
+              ]
             }
           }
         },
@@ -366,7 +382,12 @@
           "name": "Get Doctors by Specialty Breakdown",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/dashboard/specialty-stats",
               "host": ["{{baseUrl}}"],
@@ -378,7 +399,12 @@
           "name": "Get Patients per Doctor Analytics",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/dashboard/patients-per-doctor",
               "host": ["{{baseUrl}}"],
