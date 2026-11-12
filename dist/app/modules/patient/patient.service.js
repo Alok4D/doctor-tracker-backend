@@ -65,7 +65,7 @@ const getAllPatients = (filters) => __awaiter(void 0, void 0, void 0, function* 
     // Fast query with populated doctor info
     const [patients, total] = yield Promise.all([
         patient_model_1.Patient.find(query)
-            .populate('doctorId', 'name specialization hospital phone email')
+            .populate('doctorId', 'name specialization hospital phone email avatarUrl')
             .sort(sortConditions)
             .skip(skip)
             .limit(limitNumber)
@@ -90,7 +90,7 @@ const getAllPatients = (filters) => __awaiter(void 0, void 0, void 0, function* 
 });
 const getPatientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const patient = yield patient_model_1.Patient.findById(id).populate('doctorId', 'name specialization hospital phone email');
+    const patient = yield patient_model_1.Patient.findById(id).populate('doctorId', 'name specialization hospital phone email avatarUrl');
     if (!patient) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'Patient not found');
     }

@@ -74,7 +74,7 @@ const getAllPatients = async (filters: IPatientFilterOptions) => {
   // Fast query with populated doctor info
   const [patients, total] = await Promise.all([
     Patient.find(query)
-      .populate('doctorId', 'name specialization hospital phone email')
+      .populate('doctorId', 'name specialization hospital phone email avatarUrl')
       .sort(sortConditions)
       .skip(skip)
       .limit(limitNumber)
@@ -105,7 +105,7 @@ const getAllPatients = async (filters: IPatientFilterOptions) => {
 const getPatientById = async (id: string) => {
   const patient = await Patient.findById(id).populate(
     'doctorId',
-    'name specialization hospital phone email',
+    'name specialization hospital phone email avatarUrl',
   );
   if (!patient) {
     throw new AppError(httpStatus.NOT_FOUND, 'Patient not found');
